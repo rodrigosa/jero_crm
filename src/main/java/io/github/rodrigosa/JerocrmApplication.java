@@ -1,25 +1,30 @@
 package io.github.rodrigosa;
 
-import org.springframework.beans.factory.annotation.Value;
+import io.github.rodrigosa.domain.entity.Cliente;
+import io.github.rodrigosa.domain.repositorio.Clientes;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.context.annotation.Bean;
 
-@RestController
 @SpringBootApplication
 public class JerocrmApplication {
 
-   @Value("${application.name}")
-    private String applicationName;
+    @Bean
+    public CommandLineRunner init (@Autowired Clientes clientes){
+        return args -> {
+            Cliente cliente = new Cliente();
+            cliente.setNome("Rodrigo");
+            clientes.salvar(cliente);
+        };
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(JerocrmApplication.class, args);
     }
 
-    @GetMapping("/hello")
-    public String helloWorld(){
-        return applicationName;
-    }
+
+
 
 }

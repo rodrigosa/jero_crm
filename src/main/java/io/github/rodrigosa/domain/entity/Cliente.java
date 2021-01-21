@@ -1,5 +1,6 @@
 package io.github.rodrigosa.domain.entity;
 
+
 public class Cliente {
 
     private Integer id;

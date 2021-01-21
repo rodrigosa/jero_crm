@@ -1,5 +1,8 @@
 package io.github.rodrigosa.domain.entity;
 
+import javax.persistence.Entity;
+
+@Entity
 public class ItemPedido {
     private Integer id;
     private Pedido pedido;

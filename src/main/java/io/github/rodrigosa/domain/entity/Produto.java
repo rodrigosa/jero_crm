@@ -1,7 +1,9 @@
 package io.github.rodrigosa.domain.entity;
 
+import javax.persistence.Entity;
 import java.math.BigDecimal;
 
+@Entity
 public class Produto {
     private Integer id;
     private String descricao;
