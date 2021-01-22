@@ -19,39 +19,39 @@ public class JerocrmApplication {
 
             System.out.println("Salvando Clientes: ");
 
-            clientes.salvar(new Cliente("Rodrigo"));
+            clientes.save(new Cliente("Rodrigo"));
 
-            clientes.salvar(new Cliente("Douglas"));
+            clientes.save(new Cliente("Douglas"));
 
             System.out.println("Buscando todos os clientes: ");
 
-            List<Cliente> todosClientes = clientes.obterTodos();
+            List<Cliente> todosClientes = clientes.findAll();
             todosClientes.forEach(System.out::println);
 
             System.out.println("Atualizando clientes: ");
 
             todosClientes.forEach(c -> {
                 c.setNome(c.getNome() + " Atualizado.");
-                clientes.atualizar(c);
+                clientes.save(c);
             });
 
             System.out.println("Buscando clientes por nome: ");
 
 
-            clientes.buscarPorNome("dri").forEach(System.out::println);
+            clientes.findByNomeLike("%dri%").forEach(System.out::println);
 
-            todosClientes = clientes.obterTodos();
+            todosClientes = clientes.findAll();
             todosClientes.forEach(System.out::println);
 
             System.out.println("Deletando clientes: ");
 
-            clientes.obterTodos().forEach(c->{
-                clientes.deletar(c);
+            clientes.findAll().forEach(c->{
+                clientes.delete(c);
             });
 
             System.out.println("Exibindo Clientes da base: ");
 
-            todosClientes = clientes.obterTodos();
+            todosClientes = clientes.findAll();
             if(todosClientes.isEmpty()){
                 System.out.println("Nenhum cliente encontrado!!");
             }else{
