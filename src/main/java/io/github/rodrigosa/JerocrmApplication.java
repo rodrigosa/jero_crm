@@ -28,7 +28,7 @@ public class JerocrmApplication {
             List<Cliente> todosClientes = clientes.obterTodos();
             todosClientes.forEach(System.out::println);
 
-            System.out.println("Atualizando clientes: ");
+            /*System.out.println("Atualizando clientes: ");
 
             todosClientes.forEach(c -> {
                 c.setNome(c.getNome() + " Atualizado.");
@@ -40,8 +40,8 @@ public class JerocrmApplication {
 
             clientes.buscarPorNome("dri").forEach(System.out::println);
 
-            //todosClientes = clientes.obterTodos();
-            //todosClientes.forEach(System.out::println);
+            todosClientes = clientes.obterTodos();
+            todosClientes.forEach(System.out::println);
 
             System.out.println("Deletando clientes: ");
 
@@ -56,7 +56,7 @@ public class JerocrmApplication {
                 System.out.println("Nenhum cliente encontrado!!");
             }else{
                 todosClientes.forEach(System.out::println);
-            }
+            }*/
         };
     }
 
