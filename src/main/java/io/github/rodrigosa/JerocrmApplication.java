@@ -49,6 +49,8 @@ public class JerocrmApplication {
                 clientes.deletar(c);
             });
 
+            System.out.println("Exibindo Clientes da base: ");
+
             todosClientes = clientes.obterTodos();
             if(todosClientes.isEmpty()){
                 System.out.println("Nenhum cliente encontrado!!");
