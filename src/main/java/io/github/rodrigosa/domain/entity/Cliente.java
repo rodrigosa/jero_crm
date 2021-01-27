@@ -15,8 +15,13 @@ public class Cliente {
     @Column(name = "nome", length = 100)
     private String nome;
 
+    /**
+     *  A propriedade fetch do anotation @OneToMany indica como o objeto será trazido na hora da consulta
+     *  FetchType.EAGER -> Traz a lista de clientes junto durante a consulta;
+     *  FetchType.LAZY -> Traz somente os Id's dos pedidos
+     */
 
-    @OneToMany (mappedBy = "cliente") // Um Cliente para vários pedidos. O mapped by é o nome da propriedade cliente que esta mapeada em pedidos
+    @OneToMany (mappedBy = "cliente", fetch = FetchType.LAZY) // Um Cliente para vários pedidos. O mapped by é o nome da propriedade cliente que esta mapeada em pedidos
     private Set<Pedido> pedidos; // SET porque um pedido não pode ser repetido
 
     public Cliente(){

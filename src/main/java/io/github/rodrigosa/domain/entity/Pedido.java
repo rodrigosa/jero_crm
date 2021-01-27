@@ -25,7 +25,7 @@ public class Pedido {
     @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> itens;
 
-    @Column(name = "total", length = 20, precision = 2) // BigDecimal 20,2 na tabela
+    @Column(name = "total", precision = 20, scale = 2) // BigDecimal 20,2 na tabela
     private BigDecimal total;
 
     public List<ItemPedido> getItens() {
@@ -50,6 +50,15 @@ public class Pedido {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id +
+                ", dataPedido=" + dataPedido +
+                ", total=" + total +
+                '}';
     }
 
     public LocalDate getDataPedido() {
