@@ -52,12 +52,14 @@ public class JerocrmApplication {
             System.out.println("Exibindo Clientes da base: ");
 
             todosClientes = clientes.findAll();
+
             if(todosClientes.isEmpty()){
                 System.out.println("Nenhum cliente encontrado!!");
             }else{
                 todosClientes.forEach(System.out::println);
             }
         };
+
     }
 
     public static void main(String[] args) {

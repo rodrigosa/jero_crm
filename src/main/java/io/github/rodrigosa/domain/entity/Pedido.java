@@ -1,16 +1,40 @@
 package io.github.rodrigosa.domain.entity;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
+@Entity
+@Table(name = "pedido")
 public class Pedido {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @ManyToOne // Muitos pedidos (nome da Entidade) para um Cliente
+    @JoinColumn(name = "cliente_id") // Nome da coluna/foeign key na tanela pedido
     private Cliente cliente;
-    private LocalDate dataPedido;
+
+
+    @Column(name = "data_pedido")
+    private LocalDate dataPedido; // Recomendado utilizar LocalDate porque é mais simples trabalhar com esse tipo
+
+    @OneToMany(mappedBy = "pedido")
+    private List<ItemPedido> itens;
+
+    @Column(name = "total", length = 20, precision = 2) // BigDecimal 20,2 na tabela
     private BigDecimal total;
+
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemPedido> itens) {
+        this.itens = itens;
+    }
 
     public Integer getId() {
         return id;
