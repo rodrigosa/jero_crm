@@ -1,7 +1,7 @@
 package io.github.rodrigosa;
 
 import io.github.rodrigosa.domain.entity.Cliente;
-import io.github.rodrigosa.domain.repositorio.Clientes;
+import io.github.rodrigosa.domain.repository.Clientes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
