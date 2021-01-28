@@ -1,7 +1,6 @@
 package io.github.rodrigosa.rest.controller;
 
 
-import io.github.rodrigosa.domain.entity.Cliente;
 import io.github.rodrigosa.domain.entity.Produto;
 import io.github.rodrigosa.domain.repository.Produtos;
 import org.springframework.data.domain.Example;
@@ -54,10 +53,10 @@ public class ProdutosController {
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable Integer id, @RequestBody Produto produto) {
-        produtos.findById(id).map(produtoExistente -> {
-            produto.setId(id);
+        produtos.findById(id).map(p -> {
+            produto.setId(p.getId());
             produtos.save(produto);
-            return ResponseEntity.noContent().build();
+            return produto;
         }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));
     }
 
