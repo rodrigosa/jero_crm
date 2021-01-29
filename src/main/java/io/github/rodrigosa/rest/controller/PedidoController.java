@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/pedidos")
-public class PedidosController {
+public class PedidoController {
 
     private PedidoService service;
 
-    public PedidosController(PedidoService service) {
+    public PedidoController(PedidoService service) {
         this.service = service;
     }
 
