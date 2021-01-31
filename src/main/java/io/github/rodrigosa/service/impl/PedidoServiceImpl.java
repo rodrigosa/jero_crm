@@ -4,10 +4,12 @@ import io.github.rodrigosa.domain.entity.Cliente;
 import io.github.rodrigosa.domain.entity.ItemPedido;
 import io.github.rodrigosa.domain.entity.Pedido;
 import io.github.rodrigosa.domain.entity.Produto;
+import io.github.rodrigosa.domain.enums.StatusPedido;
 import io.github.rodrigosa.domain.repository.Clientes;
 import io.github.rodrigosa.domain.repository.ItemsPedido;
 import io.github.rodrigosa.domain.repository.Pedidos;
 import io.github.rodrigosa.domain.repository.Produtos;
+import io.github.rodrigosa.exception.PedidoNaoEncontradoException;
 import io.github.rodrigosa.exception.RegraNegocioException;
 import io.github.rodrigosa.rest.dto.ItemPedidoDTO;
 import io.github.rodrigosa.rest.dto.PedidoDTO;
@@ -44,6 +46,7 @@ public class PedidoServiceImpl implements PedidoService {
         pedido.setTotal(dto.getTotal());
         pedido.setDataPedido(LocalDate.now());
         pedido.setCliente(cliente);
+        pedido.setStatus(StatusPedido.REALIZADO);
 
         List<ItemPedido> itemsPedido = converterItems(pedido, dto.getItems());
         repository.save(pedido);
@@ -56,6 +59,17 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     public Optional<Pedido> obterPedidoCompleto(Integer id) {
         return repository.findByIdFetchItens(id);
+    }
+
+    @Override
+    @Transactional
+    public void atualizaStatus(Integer id, StatusPedido statusPedido) {
+        repository
+                .findById(id)
+                .map(pedido -> {
+                    pedido.setStatus(statusPedido);
+                    return repository.save(pedido);
+                }).orElseThrow(() -> new PedidoNaoEncontradoException());
     }
 
     private List<ItemPedido> converterItems(Pedido pedido, List<ItemPedidoDTO> items) {

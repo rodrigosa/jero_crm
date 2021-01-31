@@ -1,5 +1,6 @@
 package io.github.rodrigosa.domain.entity;
 
+import io.github.rodrigosa.domain.enums.StatusPedido;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,10 @@ public class Pedido {
 
     @Column(name = "total", precision = 20, scale = 2) // BigDecimal 20,2 na tabela
     private BigDecimal total;
+
+    @Enumerated(EnumType.STRING) //Anotation para gravar a String n abase
+    @Column(name = "status")
+    private StatusPedido status;
 
 
 }

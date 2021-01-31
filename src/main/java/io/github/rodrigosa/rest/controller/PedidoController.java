@@ -3,6 +3,8 @@ package io.github.rodrigosa.rest.controller;
 
 import io.github.rodrigosa.domain.entity.ItemPedido;
 import io.github.rodrigosa.domain.entity.Pedido;
+import io.github.rodrigosa.domain.enums.StatusPedido;
+import io.github.rodrigosa.rest.dto.AtualizacaoStatusPedidoDTO;
 import io.github.rodrigosa.rest.dto.InformacaoItemPedidoDTO;
 import io.github.rodrigosa.rest.dto.InformacoesPedidoDTO;
 import io.github.rodrigosa.rest.dto.PedidoDTO;
@@ -55,6 +57,7 @@ public class PedidoController {
                 .cpf(pedido.getCliente().getCpf())
                 .nomeCliente(pedido.getCliente().getNome())
                 .total(pedido.getTotal())
+                .status(pedido.getStatus().name())
                 .items(converter(pedido.getItens()))
                 .build();
 
@@ -76,6 +79,16 @@ public class PedidoController {
                 .precoUnitario(item.getProduto().getPreco())
                 .quantidade(item.getQuantidade())
                 .build()).collect(Collectors.toList());
+
+    }
+
+    @PatchMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateStatus(@PathVariable Integer id,
+                             @RequestBody AtualizacaoStatusPedidoDTO dto) {
+
+        String novoStatus = dto.getNovoStatus();
+        service.atualizaStatus(id, StatusPedido.valueOf(novoStatus));
 
     }
 }
