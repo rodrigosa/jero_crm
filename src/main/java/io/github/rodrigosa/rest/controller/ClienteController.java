@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente save(@RequestBody Cliente cliente) { // @RequestBody -> diz que o parametro vem no corpo da requsicao
+    public Cliente save(@RequestBody @Valid Cliente cliente) { // @RequestBody -> diz que o parametro vem no corpo da requsicao
 
         return clientes.save(cliente);
 
