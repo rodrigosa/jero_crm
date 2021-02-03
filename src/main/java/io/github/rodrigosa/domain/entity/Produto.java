@@ -3,6 +3,8 @@ package io.github.rodrigosa.domain.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 
@@ -18,10 +20,12 @@ public class Produto {
     @Column(name = "id")
     private Integer id;
 
+    @NotEmpty(message = "O Campo descrição é obrigatório.")
     @Column(name = "descricao")
     private String descricao;
 
     @Column(name = "preco_unitario")
+    @NotNull(message = "O preço é obrigatório")
     private BigDecimal preco;
 
 

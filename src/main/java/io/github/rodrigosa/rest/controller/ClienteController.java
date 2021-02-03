@@ -54,7 +54,7 @@ public class ClienteController {
 
     @PutMapping("{id}")// Aula 39
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable Integer id, @RequestBody Cliente cliente) {
+    public void update(@PathVariable Integer id, @RequestBody @Valid Cliente cliente) {
 
         clientes
                 .findById(id)
