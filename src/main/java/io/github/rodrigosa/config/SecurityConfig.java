@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder())
                 .withUser("fulano")
                 .password(passwordEncoder().encode("123"))
-                .roles("USER");
+                .roles("USER", "ADMIN");
     }
 
     //Autorização
@@ -40,7 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()//desabilitando segurança entre frontend e backend STATELESS
                 .authorizeRequests()
                 .antMatchers("/api/clientes/**")
-                .authenticated()
+                .hasAnyRole("USER", "ADMIN")
+                .antMatchers("/api/pedidos/**")
+                .hasAnyRole("USER", "ADMIN")
+                .antMatchers("/api/produtos/**")
+                .hasRole("ADMIN")
                 .and() //Volta para o primeiro metodo
                 .formLogin(); //Aula 69 - 8:50
         ;
