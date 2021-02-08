@@ -1,5 +1,6 @@
-package io.github.rodrigosa;
+package io.github.rodrigosa.security.jwt;
 
+import io.github.rodrigosa.JerocrmApplication;
 import io.github.rodrigosa.domain.entity.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -14,7 +15,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.HashMap;
 
 @Service
 public class JwtService {
