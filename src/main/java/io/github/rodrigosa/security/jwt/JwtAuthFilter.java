@@ -1,6 +1,7 @@
 package io.github.rodrigosa.security.jwt;
 
 import io.github.rodrigosa.service.impl.UsuarioServiceImpl;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 
 public class JwtAuthFilter extends OncePerRequestFilter {
 
@@ -41,7 +43,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             if (isValid) {
                 String loginUsuario = jwtService.obterLoginUsuario(token);
                 UserDetails usuario = usuarioService.loadUserByUsername(loginUsuario);
-                UsernamePasswordAuthenticationToken user = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+                UsernamePasswordAuthenticationToken user = new
+                        UsernamePasswordAuthenticationToken(usuario, null,
+                        usuario.getAuthorities());
 
                 user.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
 
